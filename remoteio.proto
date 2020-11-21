@@ -35,6 +35,12 @@ message SPIMessage{
   google.protobuf.Timestamp Timestamp = 5;
 }
 
+message I2CMessage{
+  uint32 addr = 1;
+  repeated uint32 bytes = 2;
+  google.protobuf.Timestamp Timestamp = 3;
+}
+
 
 service RemoteIO {
   rpc pinMode(PinModeMessage) returns (PinModeMessage){};
@@ -45,4 +51,7 @@ service RemoteIO {
 
   rpc spiRead(SPIMessage) returns (SPIMessage){};
   rpc spiWrite(SPIMessage) returns (SPIMessage){};
+
+  rpc i2cRead(I2CMessage) returns (I2CMessage){};
+  rpc i2cWrite(I2CMessage) returns (I2CMessage){};
 }
