@@ -41,6 +41,15 @@ message I2CMessage{
   google.protobuf.Timestamp Timestamp = 3;
 }
 
+message InterruptMessage{
+  uint32 pin = 1;
+  enum Edge{
+    RISING_EDGE = 0;
+    FALLING_EDGE = 1;
+    BOTH_EDGE = 2;
+  }
+  Edge triggerType = 2;
+}
 
 service RemoteIO {
   rpc pinMode(PinModeMessage) returns (PinModeMessage){};
@@ -54,4 +63,6 @@ service RemoteIO {
 
   rpc i2cRead(I2CMessage) returns (I2CMessage){};
   rpc i2cWrite(I2CMessage) returns (I2CMessage){};
+
+  rpc subscribeInterrupt(InterruptMessage) returns (stream DigitalState){};
 }
