@@ -1,14 +1,18 @@
 syntax = "proto3";
 package remoteio;
 
+import "google/protobuf/timestamp.proto";
+
 message DigitalState {
   uint32 pin = 1;
   bool state = 2;
+  google.protobuf.Timestamp Timestamp = 3;
 }
 
 message AnalogState {
   uint32 pin = 1;
   uint32 value = 2;
+  google.protobuf.Timestamp Timestamp = 3;
 }
 
 message PinModeMessage {
@@ -20,13 +24,15 @@ message PinModeMessage {
   }
   uint32 pin = 1;
   PortType mode = 2;
+  google.protobuf.Timestamp Timestamp = 3;
 }
 
 message SPIMessage{
   uint32 speed = 1;
   uint32 cs = 2;
   uint32 mode = 3;
- repeated uint32 bytes = 4;
+  repeated uint32 bytes = 4;
+  google.protobuf.Timestamp Timestamp = 5;
 }
 
 
